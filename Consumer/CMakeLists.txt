@@ -4,17 +4,23 @@ project(          Consumer VERSION 0.1
                   DESCRIPTION "Consumer"
                   LANGUAGES CXX CUDA)
 
+if(MSVC)
+    add_compile_options(/MP)
+endif()
+
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CUDA_STANDARD 17)
 
 file(GLOB_RECURSE SOURCES 
     "src/*.cpp"
+    "src/*.cu"
     "extern/glh/src/*.cpp"
     "extern/glh/src/*.c"
 )
 
 file(GLOB_RECURSE INCLUDES 
     "include/*.h*"
+    "include/*.cuh"
     "extern/glh/include/**.h*"
 )
 

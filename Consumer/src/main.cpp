@@ -5,6 +5,9 @@
 #include "glh/glh.h"
 #include "GLFW/glfw3.h"
 
+#include <cuda_runtime.h>
+#include <device_launch_parameters.h>
+
 void error_callback(int error, const char* description)
 {
     fprintf(stderr, "Error: %s\n", description);
@@ -29,8 +32,22 @@ Vertex vertices[3] =
     { {   0.f,  0.6f }, { 0.f, 0.f, 1.f } }
 };
 
+extern "C" void launchHelloKernel(char* str, int size);
+
 int main()
 {
+    const char* original = "Hello World from CPU!";
+    char* str = new char[strlen(original) + 1];
+    strcpy(str, original);
+
+    std::cout << "Original string: " << str << std::endl;
+
+    launchHelloKernel(str, strlen(str) + 1);
+
+    std::cout << "Modified string: " << str << std::endl;
+
+    delete[] str;
+   
     const char* vertex_shader_text = glh::utils::loadFile("C:\\dev\\cuda-texture\\res\\default.vert");
     const char* fragment_shader_text = glh::utils::loadFile("C:\\dev\\cuda-texture\\res\\default.frag");
 
@@ -46,7 +63,7 @@ int main()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE); // COMPAT PROFILE CHOSEN
 
     // Create a GLFW window
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Consumer", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(800, 600, "Producer", nullptr, nullptr);
     if (!window) {
         std::cerr << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
