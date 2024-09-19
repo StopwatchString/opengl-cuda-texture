@@ -1,0 +1,18 @@
+[submodule "Producer/extern/glm"]
+	path = Producer/extern/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "Consumer/extern/glm"]
+	path = Consumer/extern/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "Producer/extern/glfw"]
+	path = Producer/extern/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "Consumer/extern/glfw"]
+	path = Consumer/extern/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "Producer/extern/glh"]
+	path = Producer/extern/glh
+	url = https://github.com/StopwatchString/glh.git
+[submodule "Consumer/extern/glh"]
+	path = Consumer/extern/glh
+	url = https://github.com/StopwatchString/glh.git
